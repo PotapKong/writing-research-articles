@@ -1,6 +1,6 @@
 ---
 name: writing-research-articles
-description: Conduct verified web research, build a source-traceable Fact Grid, and write professional fact-based articles with citations, hyperlink maps, and visual placeholders. Use when Codex is asked for deep research, source verification, current or time-sensitive information, investment or market analysis, geopolitical or business longreads, Telegraph-style editorial HTML, n8n/JSON article pipelines, or publication-ready longform content in Markdown, HTML, or JSON.
+description: Conduct verified web research, build a source-traceable Fact Grid, and write professional fact-based articles with citations, hyperlink maps, screenshots, generated visuals, document exports, or publication targets. Use when an agent is asked for deep research, source verification, current or time-sensitive information, investment or market analysis, geopolitical or business longreads, browser-based evidence capture through chip-relay or similar tools, GPT Image 2 visual generation, DOCX or Google Docs delivery, Telegraph-style editorial HTML, telegra.ph publishing, n8n/JSON article pipelines, or publication-ready longform content.
 ---
 
 # Writing Research Articles
@@ -8,6 +8,8 @@ description: Conduct verified web research, build a source-traceable Fact Grid, 
 ## Core workflow
 
 Use this skill to keep research writing evidence-led. Do not draft factual longform from memory when claims depend on dates, statistics, prices, rankings, filings, market data, policy changes, or current roles.
+
+This skill is host-agnostic. Use the tools available in the current agent runtime. For Codex, use web/browser/document/image tools when available. For OpenClaw, Hermes, or other agents, map the same workflow onto their browsing, file, image, and publishing adapters. For cross-agent capability routing, see [agent-capabilities.md](references/agent-capabilities.md).
 
 Track progress with this checklist:
 
@@ -21,8 +23,8 @@ Research Progress:
 - [ ] Step 6: Draft article from verified grid only
 - [ ] Step 7: Editorial cleanup pass
 - [ ] Step 8: Pre-publication fact re-check
-- [ ] Step 9: Attach Hyperlink Map and Visual Placeholders
-- [ ] Step 10: Output in the requested format
+- [ ] Step 9: Replace placeholders with screenshots, charts, diagrams, or generation notes
+- [ ] Step 10: Export or publish in the requested target
 ```
 
 In interactive writing sessions, show the Fact Grid before drafting when the user asks for approval gates or the topic is high-stakes. If the user asks for a complete article in one pass, include the Fact Grid in the final output and draft from it without stopping. In automation/n8n mode, put the Fact Grid inside JSON and proceed directly.
@@ -31,9 +33,11 @@ In interactive writing sessions, show the Fact Grid before drafting when the use
 
 Detect from context. Apply in order:
 
-1. **HTML Artifact** — user mentions Telegraph, landing page, dark theme, editorial HTML
-2. **JSON** — user mentions n8n, automation, pipeline, structured output. See [output-formats.md](references/output-formats.md)
-3. **Markdown** — default for all other cases
+1. **Published page** — user asks to publish to telegra.ph, Telegraph, CMS, or another live page. See [document-publishing.md](references/document-publishing.md)
+2. **DOCX or Google Docs** — user asks for a file, Word document, editorial handoff, or Google Docs delivery. See [document-publishing.md](references/document-publishing.md)
+3. **HTML Artifact** — user mentions Telegraph-style HTML, landing page, dark theme, or editorial HTML
+4. **JSON** — user mentions n8n, automation, pipeline, structured output. See [output-formats.md](references/output-formats.md)
+5. **Markdown** — default for all other cases
 
 ### Step 1: Parse the brief
 
@@ -60,6 +64,7 @@ Break assignment into tracks:
 - Open URLs for confirmation, such as `web.run` `open`.
 - Use official documentation, filings, regulator pages, investor relations pages, and primary datasets whenever available.
 - Use browser tools only when a page must be visually inspected, interacted with, or verified.
+- If the runtime has `chip-relay`, use it for persistent authenticated browser sessions, screenshot capture, and telegra.ph publishing workflows. See [browser-capture.md](references/browser-capture.md).
 
 **Query construction:**
 - 2–6 words per query. Short specific queries outperform natural-language ones.
@@ -122,11 +127,17 @@ Run a second-pass fact-check on the finished text:
 
 If a sentence cannot be re-confirmed from the verified grid — soften it, narrow it, or cut it.
 
-### Step 9: Attach Hyperlink Map and Visual Placeholders
+### Step 9: Resolve visuals and placeholders
 
 For citation rules and Hyperlink Map format, see [citations.md](references/citations.md).
 
-For visual placeholder rules, see [visual-placeholders.md](references/visual-placeholders.md).
+For placeholder rules, screenshots, chart/diagram generation, and GPT Image 2 visual prompts, see [visual-placeholders.md](references/visual-placeholders.md), [browser-capture.md](references/browser-capture.md), and [generated-visuals.md](references/generated-visuals.md).
+
+Use this order:
+1. Use verified source images, screenshots, tables, or charts when they are the evidence.
+2. Generate deterministic charts from verified data when exact values matter.
+3. Use GPT Image 2 or the host's best image model for editorial visuals, conceptual diagrams, and non-numeric explanatory scenes.
+4. Leave a placeholder only when the asset cannot be produced in the current runtime; include exact acquisition instructions.
 
 ### Step 10: Final output
 
@@ -134,11 +145,14 @@ Return in this order:
 1. Fact Grid (Markdown table + verification summary)
 2. Title + Optional Subhead
 3. Full article with inline citations
-4. Hyperlink Map
-5. Source Notes
-6. Optional Disclaimer (required for articles touching markets, investing, tokens, macro, or public securities)
+4. Embedded or attached visuals, with captions and source/provenance notes
+5. Hyperlink Map
+6. Source Notes
+7. Delivery artifact or link when requested
+8. Optional Disclaimer (required for articles touching markets, investing, tokens, macro, or public securities)
 
 For HTML and JSON output formats, see [output-formats.md](references/output-formats.md).
+For DOCX, Google Docs, and telegra.ph publishing, see [document-publishing.md](references/document-publishing.md).
 
 ## Non-negotiable standards
 
@@ -151,6 +165,7 @@ For HTML and JSON output formats, see [output-formats.md](references/output-form
 7. No lazy AI patterns, inflated filler, robotic transitions, or stock framing devices.
 8. Repeat fact-check before delivery.
 9. Respect the host environment's citation, quotation, and copyright rules.
+10. Never use generated images or screenshots as factual evidence unless the underlying source is separately captured in the Fact Grid.
 
 ## Failure conditions
 
@@ -161,6 +176,12 @@ If search returns no relevant results, or a page cannot be opened because of a p
 
 If a major tool call fails: note the failure in Source Notes and proceed with available verified sources only. Do not substitute unverified memory for failed tool results.
 
+If browser login, document upload, or publishing fails:
+- do not ask for passwords, cookies, or tokens in chat
+- use only an existing authenticated browser profile or a user-approved login flow
+- fall back to a local DOCX, HTML, or Markdown artifact
+- report the exact unpublished state and next action needed
+
 ## Revision loop
 
 When client reacts after review, handle feedback in this order:
@@ -168,7 +189,8 @@ When client reacts after review, handle feedback in this order:
 2. structural weakness — cut or reorder sections
 3. tonal mismatch — adjust voice within the same evidence base
 4. visual or image-hosting issue — update placeholder notes with new source URLs
-5. headline or hook adjustment
+5. export or publishing issue — regenerate the requested artifact or retry publish through the authenticated browser
+6. headline or hook adjustment
 
 Response to feedback must be surgical. Do not rewrite the whole article if one paragraph is the real issue. When a section is cut, rebalance transitions and conclusion.
 
@@ -182,4 +204,8 @@ Response to feedback must be surgical. Do not rewrite the whole article if one p
 | [output-formats.md](references/output-formats.md) | HTML, JSON schema, Markdown rules |
 | [citations.md](references/citations.md) | Citation rules, Hyperlink Map format |
 | [visual-placeholders.md](references/visual-placeholders.md) | Visual placeholder rules |
+| [generated-visuals.md](references/generated-visuals.md) | GPT Image 2, charts, diagrams, visual provenance |
+| [browser-capture.md](references/browser-capture.md) | chip-relay browser workflow, screenshots, authenticated capture |
+| [document-publishing.md](references/document-publishing.md) | DOCX, Google Docs, HTML, telegra.ph publishing |
+| [agent-capabilities.md](references/agent-capabilities.md) | Runtime capability routing for Codex, OpenClaw, Hermes |
 | [examples.md](references/examples.md) | Example invocations and expected behavior |

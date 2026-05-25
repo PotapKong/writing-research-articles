@@ -1,4 +1,4 @@
 interface:
   display_name: "Writing Research Articles"
-  short_description: "Verified research articles with citations"
-  default_prompt: "Use $writing-research-articles to research a topic, build a Fact Grid, and draft a publication-ready article."
+  short_description: "Research articles, visuals, docs, publishing"
+  default_prompt: "Use $writing-research-articles to research a topic, build a Fact Grid, create needed visuals, and deliver a publication-ready article."

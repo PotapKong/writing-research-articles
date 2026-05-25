@@ -1,10 +1,10 @@
 # writing-research-articles
 
-A Codex skill for verified web research and fact-based article writing.
+A portable agent skill for verified web research, fact-based article writing, visual evidence capture, document export, and publishing.
 
 ## What it does
 
-Conducts deep web research, builds a visible **Fact Grid** with confidence levels, then writes a professional article with inline citations, a hyperlink map, and visual placeholders.
+Conducts deep web research, builds a visible **Fact Grid** with confidence levels, writes a professional article with inline citations and a hyperlink map, then delivers the result as Markdown, HTML, JSON, DOCX, Google Docs, or a published telegra.ph/Telegraph-style page when the host agent has the required adapters.
 
 ## When to use
 
@@ -15,6 +15,9 @@ Conducts deep web research, builds a visible **Fact Grid** with confidence level
 - Telegraph-style HTML publications
 - Source verification and fact-checking
 - Publication-ready longform content in Markdown, HTML, or JSON
+- Browser screenshot capture through `chip-relay` or a host browser adapter
+- GPT Image 2 diagrams, editorial visuals, and cover images
+- DOCX, Google Docs, and telegra.ph publishing workflows
 
 ## Install
 
@@ -24,7 +27,9 @@ Copy or clone this repository into your Codex skills directory:
 git clone https://github.com/PotapKong/writing-research-articles "$env:USERPROFILE\.codex\skills\writing-research-articles"
 ```
 
-Then invoke it as `$writing-research-articles` or ask Codex for a verified research article.
+Then invoke it as `$writing-research-articles` or ask your agent for a verified research article.
+
+For OpenClaw, Hermes, or other agents, install the folder in the runtime's skills directory and map host tools to the capability contract in `references/agent-capabilities.md`.
 
 ## Workflow (10 steps)
 
@@ -36,14 +41,22 @@ Then invoke it as `$writing-research-articles` or ask Codex for a verified resea
 6. Draft article from verified grid only
 7. Editorial cleanup pass
 8. Pre-publication fact re-check
-9. Attach Hyperlink Map and Visual Placeholders
-10. Output in correct format
+9. Replace visual placeholders with screenshots, charts, diagrams, or generation notes
+10. Export or publish in the requested target
 
 ## Output formats
 
 - **HTML Artifact** — for Telegraph, landing pages, dark theme editorial
 - **JSON** — for n8n, automation pipelines, structured output
+- **DOCX / Google Docs** — for editorial handoff
+- **telegra.ph / published page** — when explicitly requested and authenticated tooling is available
 - **Markdown** — default
+
+## Optional adapters
+
+- `chip-relay` for persistent CDP browser sessions, screenshots, authenticated capture, and publishing
+- GPT Image 2 or the host's current best image model for diagrams, cover visuals, and non-numeric editorial graphics
+- Document adapters for DOCX and Google Docs export
 
 ## Files
 
@@ -51,4 +64,4 @@ Then invoke it as `$writing-research-articles` or ask Codex for a verified resea
 |------|----------|
 | `SKILL.md` | Main skill definition and workflow |
 | `agents/openai.yaml` | Codex UI metadata |
-| `references/` | Source hierarchy, style, article structure, citations, formats, visuals, examples |
+| `references/` | Source hierarchy, style, article structure, citations, formats, visuals, browser capture, publishing, examples |
