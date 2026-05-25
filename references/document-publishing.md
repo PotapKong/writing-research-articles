@@ -11,7 +11,7 @@ Use this reference when the user asks for DOCX, Word, Google Docs, HTML, telegra
 | "file", "Word", "docx", "editorial handoff" | DOCX |
 | "Google Docs" | Google Docs link if connector/browser upload is available; otherwise DOCX |
 | "Telegraph style" | HTML or telegra.ph page depending on whether publishing is requested |
-| "publish", "post to telegra.ph", "give me a link" | Published page plus local fallback artifact |
+| "publish", "post to telegra.ph", "give me a link" | Article file first, then authorization request, then published page |
 | "n8n", "pipeline", "structured" | JSON schema from output formats |
 
 ## DOCX export
@@ -46,12 +46,14 @@ Use telegra.ph only when explicitly requested.
 
 Workflow:
 
-1. Prepare article as clean HTML or editor-compatible blocks.
-2. Use `chip-relay` or the host browser to open telegra.ph with an authenticated profile if the user wants account-backed publishing.
-3. Insert title, author if requested, article body, images, captions, and links.
-4. Preview and visually verify the page.
-5. Publish only after the user has asked for publishing or has already authorized the publish step.
-6. Return the public URL and a local copy of the final article when possible.
+1. Prepare the final article as a local file first, preferably DOCX or HTML with embedded/linked assets.
+2. Return the file path or artifact to the user for review.
+3. Ask the user to authorize the publishing step and, if needed, complete browser login interactively.
+4. Use `chip-relay` or the host browser to open telegra.ph with an authenticated profile after authorization.
+5. Insert title, author if requested, article body, images, captions, and links.
+6. Preview and visually verify the page.
+7. Publish only after authorization is confirmed.
+8. Return the public URL and keep the local article file as fallback.
 
 If authentication is unavailable, publish only if the target supports anonymous posting and the user accepts that limitation.
 

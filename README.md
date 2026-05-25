@@ -16,7 +16,7 @@ Conducts deep web research, builds a visible **Fact Grid** with confidence level
 - Source verification and fact-checking
 - Publication-ready longform content in Markdown, HTML, or JSON
 - Browser screenshot capture through `chip-relay` or a host browser adapter
-- GPT Image 2 diagrams, editorial visuals, and cover images
+- Host-native image generation for diagrams, editorial visuals, and cover images
 - DOCX, Google Docs, and telegra.ph publishing workflows
 
 ## Install
@@ -55,7 +55,7 @@ For OpenClaw, Hermes, or other agents, install the folder in the runtime's skill
 ## Optional adapters
 
 - `chip-relay` for persistent CDP browser sessions, screenshots, authenticated capture, and publishing
-- GPT Image 2 or the host's current best image model for diagrams, cover visuals, and non-numeric editorial graphics
+- The host agent's configured image backend for diagrams, cover visuals, and non-numeric editorial graphics
 - Document adapters for DOCX and Google Docs export
 
 ## Files

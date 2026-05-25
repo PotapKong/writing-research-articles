@@ -4,9 +4,32 @@
 
 Use this reference when the article needs charts, diagrams, editorial illustrations, cover images, or replacement assets for visual placeholders.
 
-## Model preference
+## Backend selection
 
-Prefer GPT Image 2 when the host exposes it. If GPT Image 2 is unavailable, use the host's current best OpenAI image model or image-generation adapter. Do not hard-code an unavailable model name; check the runtime or official docs when implementation details matter.
+Use the image-generation method configured in the current agent runtime. Do not assume one universal backend.
+
+Examples of valid host-native backends:
+
+- GPT Image 2
+- Nano Banana
+- the host's built-in image tool
+- an OpenAI, Google, local, or custom image adapter exposed by the agent
+- a deterministic diagram renderer for vector or Mermaid-style diagrams
+
+If exactly one suitable backend is configured, use it. If several are available, choose the most efficient option for the visual task or ask the agent owner for a priority preference when cost, quality, latency, brand consistency, or privacy matters.
+
+Selection heuristic:
+
+| Need | Prefer |
+|------|--------|
+| Editorial cover or polished illustration | highest-quality configured image model |
+| Fast draft concept | lowest-latency configured image model |
+| Private or sensitive source material | local/private backend if available |
+| Diagram with labels | deterministic diagram tool first, image model only if visual polish matters |
+| Exact data chart | deterministic chart renderer, not image generation |
+| Style consistency across a series | the backend already used for the series |
+
+Do not hard-code an unavailable model name. Check the runtime, environment config, or owner preference when implementation details matter.
 
 ## Evidence boundary
 
@@ -15,8 +38,8 @@ Generated visuals are not evidence. They explain or illustrate evidence already 
 Use this rule:
 
 - **Exact numbers, time series, rankings, prices, market share:** render deterministically from verified data.
-- **Processes, mechanisms, architecture, causal chains:** use diagrams, Mermaid, vector drawing, or GPT Image 2.
-- **Editorial cover images and atmosphere:** use GPT Image 2 only when the article benefits from a lead visual.
+- **Processes, mechanisms, architecture, causal chains:** use diagrams, Mermaid, vector drawing, or the configured image backend.
+- **Editorial cover images and atmosphere:** use the configured image backend only when the article benefits from a lead visual.
 - **Screenshots of source material:** capture through browser tools, not image generation.
 
 ## Chart workflow
@@ -29,7 +52,7 @@ Use this rule:
 
 If no chart renderer is available, provide a table and leave a chart placeholder with exact data instructions.
 
-## GPT Image 2 prompt pattern
+## Image prompt pattern
 
 Use concise, specific prompts:
 

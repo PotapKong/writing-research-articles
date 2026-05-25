@@ -44,13 +44,13 @@
 
 ## Example 4: Article with screenshots and generated diagram
 
-**User:** Research the latest AI chip export controls, capture key source screenshots through chip-relay, generate one clean explanatory diagram with GPT Image 2, and deliver a DOCX.
+**User:** Research the latest AI chip export controls, capture key source screenshots through chip-relay, generate one clean explanatory diagram with the configured image backend, and deliver a DOCX.
 
 **Expected behavior:**
 1. research and verify as normal
 2. use `chip-relay` or the host browser adapter for source screenshots
 3. render exact charts from verified data if charts are needed
-4. use GPT Image 2 only for the explanatory diagram or cover visual
+4. use the agent's configured image backend only for the explanatory diagram or cover visual
 5. replace placeholders with embedded assets and captions
 6. export a DOCX with source notes and hyperlink map
 
@@ -61,12 +61,13 @@
 **User:** Prepare this as a Telegraph-style article, publish it to telegra.ph from my authenticated browser profile, and give me the link.
 
 **Expected behavior:**
-1. verify that publishing was explicitly requested
-2. use `chip-relay` or available browser tooling with the existing authenticated profile
-3. do not ask for passwords, cookies, or tokens in chat
-4. insert article body, images, captions, and links
-5. visually verify the published page
-6. return the telegra.ph URL and local fallback artifact path if available
+1. prepare and return the article file first
+2. ask the user to authorize the publishing step and browser login if needed
+3. use `chip-relay` or available browser tooling with the existing authenticated profile after authorization
+4. do not ask for passwords, cookies, or tokens in chat
+5. insert article body, images, captions, and links
+6. visually verify the published page
+7. return the telegra.ph URL and keep the local fallback artifact path
 
 ---
 

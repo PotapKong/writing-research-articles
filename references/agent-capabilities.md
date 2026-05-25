@@ -13,7 +13,7 @@ Use this reference when running the skill outside Codex, especially in OpenClaw,
 | Authenticated browsing | `chip-relay` persistent CDP profile | host browser tool |
 | Screenshots | `chip-relay` + Playwright/Puppeteer/CDP | host browser screenshot tool |
 | Deterministic charts | local chart renderer, notebook, spreadsheet, or HTML canvas | table plus chart placeholder |
-| Editorial visuals | GPT Image 2 or current OpenAI image model | host image tool |
+| Editorial visuals | host-configured image backend | ask owner preference or use text placeholder |
 | DOCX export | host document adapter | local HTML/Markdown handoff |
 | Google Docs | host Google Docs connector or browser upload | DOCX file |
 | telegra.ph publishing | authenticated browser profile through `chip-relay` | HTML file plus manual publishing notes |
@@ -25,6 +25,7 @@ Use this reference when running the skill outside Codex, especially in OpenClaw,
 3. Never require secrets in the skill repository or chat transcript.
 4. Use existing authenticated browser profiles only when the user has already set them up or explicitly completes login in the browser.
 5. If a capability is unavailable, finish with the closest durable artifact and explain the missing adapter.
+6. For image generation, use the runtime's configured backend. If multiple backends are configured, choose by task fit or ask the owner for the priority backend.
 
 ## Adapter contract
 

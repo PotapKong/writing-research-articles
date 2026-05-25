@@ -40,5 +40,5 @@ Do not suggest abstract conceptual collages unless you also provide a real sourc
 
 - Source screenshots: capture through browser tooling. See [browser-capture.md](browser-capture.md).
 - Exact charts: render from verified data, not from a generative image model.
-- Conceptual diagrams and cover visuals: use GPT Image 2 or the host's current best image model when available. See [generated-visuals.md](generated-visuals.md).
+- Conceptual diagrams and cover visuals: use the host agent's configured image-generation backend when available. See [generated-visuals.md](generated-visuals.md).
 - DOCX, Google Docs, or telegra.ph embedding: preserve the caption and source/provenance line near the asset. See [document-publishing.md](document-publishing.md).

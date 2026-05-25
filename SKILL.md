@@ -1,6 +1,6 @@
 ---
 name: writing-research-articles
-description: Conduct verified web research, build a source-traceable Fact Grid, and write professional fact-based articles with citations, hyperlink maps, screenshots, generated visuals, document exports, or publication targets. Use when an agent is asked for deep research, source verification, current or time-sensitive information, investment or market analysis, geopolitical or business longreads, browser-based evidence capture through chip-relay or similar tools, GPT Image 2 visual generation, DOCX or Google Docs delivery, Telegraph-style editorial HTML, telegra.ph publishing, n8n/JSON article pipelines, or publication-ready longform content.
+description: Conduct verified web research, build a source-traceable Fact Grid, and write professional fact-based articles with citations, hyperlink maps, screenshots, host-native generated visuals, document exports, or publication targets. Use when an agent is asked for deep research, source verification, current or time-sensitive information, investment or market analysis, geopolitical or business longreads, browser-based evidence capture through chip-relay or similar tools, image generation through the agent's configured backend, DOCX or Google Docs delivery, Telegraph-style editorial HTML, telegra.ph publishing, n8n/JSON article pipelines, or publication-ready longform content.
 ---
 
 # Writing Research Articles
@@ -131,12 +131,12 @@ If a sentence cannot be re-confirmed from the verified grid — soften it, narro
 
 For citation rules and Hyperlink Map format, see [citations.md](references/citations.md).
 
-For placeholder rules, screenshots, chart/diagram generation, and GPT Image 2 visual prompts, see [visual-placeholders.md](references/visual-placeholders.md), [browser-capture.md](references/browser-capture.md), and [generated-visuals.md](references/generated-visuals.md).
+For placeholder rules, screenshots, chart/diagram generation, and native image-adapter prompts, see [visual-placeholders.md](references/visual-placeholders.md), [browser-capture.md](references/browser-capture.md), and [generated-visuals.md](references/generated-visuals.md).
 
 Use this order:
 1. Use verified source images, screenshots, tables, or charts when they are the evidence.
 2. Generate deterministic charts from verified data when exact values matter.
-3. Use GPT Image 2 or the host's best image model for editorial visuals, conceptual diagrams, and non-numeric explanatory scenes.
+3. Use the host agent's configured image-generation backend for editorial visuals, conceptual diagrams, and non-numeric explanatory scenes.
 4. Leave a placeholder only when the asset cannot be produced in the current runtime; include exact acquisition instructions.
 
 ### Step 10: Final output
@@ -182,6 +182,8 @@ If browser login, document upload, or publishing fails:
 - fall back to a local DOCX, HTML, or Markdown artifact
 - report the exact unpublished state and next action needed
 
+If telegra.ph publishing is requested, first produce and return the article file or local artifact. After the user can inspect it, ask for authorization to open the browser/login flow and publish. Do not publish in the same step that first creates the article file unless the user has already approved that exact publish action.
+
 ## Revision loop
 
 When client reacts after review, handle feedback in this order:
@@ -204,7 +206,7 @@ Response to feedback must be surgical. Do not rewrite the whole article if one p
 | [output-formats.md](references/output-formats.md) | HTML, JSON schema, Markdown rules |
 | [citations.md](references/citations.md) | Citation rules, Hyperlink Map format |
 | [visual-placeholders.md](references/visual-placeholders.md) | Visual placeholder rules |
-| [generated-visuals.md](references/generated-visuals.md) | GPT Image 2, charts, diagrams, visual provenance |
+| [generated-visuals.md](references/generated-visuals.md) | Native image generation, charts, diagrams, visual provenance |
 | [browser-capture.md](references/browser-capture.md) | chip-relay browser workflow, screenshots, authenticated capture |
 | [document-publishing.md](references/document-publishing.md) | DOCX, Google Docs, HTML, telegra.ph publishing |
 | [agent-capabilities.md](references/agent-capabilities.md) | Runtime capability routing for Codex, OpenClaw, Hermes |
