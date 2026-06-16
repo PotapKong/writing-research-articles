@@ -31,11 +31,26 @@ Use Playwright, Puppeteer, or the host browser adapter to connect to the endpoin
 ## Screenshot rules
 
 1. Capture only what supports a specific claim, visual explanation, or publishing step.
-2. Prefer source-document charts, regulator tables, investor relations pages, product pages, or live platform states over decorative screenshots.
+2. Prefer source-document charts, regulator tables, investor relations pages, news pages, product pages, technical docs, benchmark pages, or live platform states over decorative screenshots.
 3. Store screenshots as files and reference their paths in Source Notes or the article asset manifest.
 4. Caption every screenshot with source, URL, capture date, and what the reader should notice.
 5. If a page is authenticated or user-specific, say so in the caption and avoid exposing private data.
 6. Crop or mask personal data, account IDs, tokens, cookies, internal URLs, or email addresses before embedding.
+7. Capture the smallest useful region: table, chart, quote block, headline,
+   benchmark panel, or product state. Avoid full-page screenshots unless layout
+   context is the point.
+8. After capture, verify that text is legible, the crop contains the cited
+   evidence, and no private information is visible.
+
+## Screenshot target priority
+
+1. Existing source chart or table that directly supports a claim.
+2. Official statement, model card, docs page, benchmark page, filing, or policy
+   page.
+3. Reported news page when the article needs the headline, quote, or context.
+4. Product UI, workflow, or live page state when the article is about user-facing
+   behavior.
+5. Context screenshot only when the visual setting itself is important.
 
 ## Replacing placeholders
 
@@ -46,6 +61,8 @@ For each placeholder:
 3. Replace the placeholder with an embedded image, figure block, DOCX image, Google Docs image, or telegra.ph image upload.
 4. Add a caption and provenance note.
 5. Keep the original source URL in the Hyperlink Map or Source Notes.
+6. Record the asset in the manifest described in
+   [runtime-adapters.md](runtime-adapters.md).
 
 If capture fails, leave the placeholder but add exact acquisition notes:
 

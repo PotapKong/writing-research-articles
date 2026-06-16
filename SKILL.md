@@ -1,15 +1,15 @@
 ---
 name: writing-research-articles
-description: Conduct verified web research, build a source-traceable Fact Grid, and write professional fact-based articles with citations, hyperlink maps, screenshots, host-native generated visuals, document exports, or publication targets. Use when an agent is asked for deep research, source verification, current or time-sensitive information, investment or market analysis, geopolitical or business longreads, browser-based evidence capture through chip-relay or similar tools, image generation through the agent's configured backend, DOCX or Google Docs delivery, Telegraph-style editorial HTML, telegra.ph publishing, n8n/JSON article pipelines, or publication-ready longform content.
+description: Conduct verified web research, build source-traceable Fact Grids, discover authoritative source material, capture evidence screenshots, generate verified-data visuals, and write professional fact-based articles with citations, hyperlink maps, document exports, or publication targets. Use when an agent is asked for deep research, source verification, current or time-sensitive information, AI and agentic-systems research, source/topic discovery from Western English-language media and expert writers, investment or market analysis, geopolitical or business longreads, browser-based evidence capture through Codex/Claude Code/Hermes/chip-relay tools, GPT Image 2 or host-native image generation, DOCX/PDF/Google Docs delivery, Telegraph-style editorial HTML, telegra.ph publishing, n8n/JSON article pipelines, or publication-ready longform content.
 ---
 
 # Writing Research Articles
 
 ## Core workflow
 
-Use this skill to keep research writing evidence-led. Do not draft factual longform from memory when claims depend on dates, statistics, prices, rankings, filings, market data, policy changes, or current roles.
+Use this skill to keep research writing evidence-led. Do not draft factual longform from memory when claims depend on dates, statistics, prices, rankings, filings, market data, policy changes, current roles, model capabilities, technical claims, benchmarks, or fast-moving AI tooling.
 
-This skill is host-agnostic. Use the tools available in the current agent runtime. For Codex, use web/browser/document/image tools when available. For OpenClaw, Hermes, or other agents, map the same workflow onto their browsing, file, image, and publishing adapters. For cross-agent capability routing, see [agent-capabilities.md](references/agent-capabilities.md).
+This skill is host-agnostic. Use the tools available in the current agent runtime. For Codex, Claude Code, Hermes, OpenClaw, or other agents, map the same workflow onto their browsing, file, image, and publishing adapters. For cross-agent capability routing, see [agent-capabilities.md](references/agent-capabilities.md) and [runtime-adapters.md](references/runtime-adapters.md).
 
 Track progress with this checklist:
 
@@ -27,6 +27,21 @@ Research Progress:
 - [ ] Step 10: Export or publish in the requested target
 ```
 
+## Research modes
+
+Choose the lightest mode that can satisfy the user without weakening evidence.
+
+| Mode | Use when | Required output |
+|------|----------|-----------------|
+| **quick** | short article, brief explainer, or narrow update | compact Fact Grid, 3-6 strong sources, concise article |
+| **standard** | default article or analytical post | full Fact Grid, source hierarchy, article, Hyperlink Map |
+| **deep** | high-stakes, market, policy, technical, investigative, or longform work | expanded Fact Grid, conflicts/exclusions, visuals, pre-publication re-check |
+| **discovery-first** | user wants links, topics, source options, or inspiration before choosing an article | Source Shortlist first; wait for user selection before drafting unless asked to proceed |
+
+Discovery-first mode is especially useful for AI, agentic systems, automation,
+LLM products, research labs, policy, and emerging technical trends. See
+[ai-agentic-systems.md](references/ai-agentic-systems.md).
+
 In interactive writing sessions, show the Fact Grid before drafting when the user asks for approval gates or the topic is high-stakes. If the user asks for a complete article in one pass, include the Fact Grid in the final output and draft from it without stopping. In automation/n8n mode, put the Fact Grid inside JSON and proceed directly.
 
 ## Output format
@@ -37,27 +52,37 @@ Detect from context. Apply in order:
 2. **DOCX or Google Docs** — user asks for a file, Word document, editorial handoff, or Google Docs delivery. See [document-publishing.md](references/document-publishing.md)
 3. **HTML Artifact** — user mentions Telegraph-style HTML, landing page, dark theme, or editorial HTML
 4. **JSON** — user mentions n8n, automation, pipeline, structured output. See [output-formats.md](references/output-formats.md)
-5. **Markdown** — default for all other cases
+5. **PDF** — user asks for PDF, print handoff, or a fixed-layout file. See [document-publishing.md](references/document-publishing.md)
+6. **Markdown** — default for all other cases
 
 ### Step 1: Parse the brief
 
 Extract internally:
-- exact topic, target angle, geography/market scope, time horizon
-- intended audience, article type (analytical / explanatory / persuasive / comparative / news)
+- exact topic, target angle, geography/market scope, domain, time horizon
+- intended audience, article type (analytical / explanatory / persuasive / comparative / news / technical explainer / source discovery)
 - publication date sensitivity
+- requested mode: quick, standard, deep, or discovery-first
 
 If the brief is sparse, convert to a working assignment with: topic, core thesis candidate, target emotional temperature, audience sophistication, publishing format, mandatory reference inputs, optional side angles, likely weak sections requiring deeper verification.
 
 If the client gives a reference reel, thread, article, or Telegram post — extract the hook or angle only. Rebuild the piece on a stronger verified evidence base. Do not copy the structure blindly.
 
+If the user asks to find Western English-language sources, expert authors,
+top bloggers, articles, or topic options, switch to discovery-first mode:
+collect a ranked Source Shortlist and stop for user selection before drafting.
+
 ### Step 2: Build research question set
 
 Break assignment into tracks:
-- core thesis, market size/growth, policy/regulatory, company-specific, counterargument/risk, recent developments, valuation/financial performance
+- core thesis, recent developments, primary evidence, counterargument/risk, expert debate, audience relevance
+- add domain tracks as needed:
+  - AI/agentic systems: research papers, lab/product posts, evals/benchmarks, practitioner case studies, architecture patterns, safety/governance, credible expert commentary
+  - markets/investment: market size/growth, company-specific disclosures, valuation/financial performance, regulatory/policy
+  - geopolitics/policy: official statements, legislation, institutional reports, regional actors, historical context
 
 ### Step 3: Search the web
 
-**When to search:** Always browse before drafting when the task involves any date, price, statistic, ranking, market figure from the last 24 months, company filings or official statements, policy changes, news, recommendations, or persons currently holding a role.
+**When to search:** Always browse before drafting when the task involves any date, price, statistic, ranking, market figure from the last 24 months, company filings or official statements, policy changes, news, recommendations, persons currently holding a role, AI model/tool capabilities, benchmarks, product launches, or current expert commentary.
 
 **Codex tool mapping:**
 - Use available web search tools for discovery, such as `web.run` `search_query`.
@@ -68,9 +93,13 @@ Break assignment into tracks:
 
 **Query construction:**
 - 2–6 words per query. Short specific queries outperform natural-language ones.
-- Always search in English, even when the article will be in Russian.
+- For global business, AI, agentic systems, technology, markets, and geopolitics, start in English even when the article will be in Russian.
+- Add source-language searches when the primary evidence is likely to be non-English: local regulators, domestic media, official documents, regional experts, or original posts.
 - For each research track, run at least 2 independent queries from different angles.
 - Never repeat a query verbatim — rephrase with different nouns or add year/institution.
+
+For AI and agentic-systems discovery, use the additional query patterns and
+source ranking in [ai-agentic-systems.md](references/ai-agentic-systems.md).
 
 ### Step 4: Open primary sources
 
@@ -97,6 +126,21 @@ Confidence levels:
 - **Excluded** — found but not verifiable; note reason
 
 After the table, add a short paragraph: total sources checked, excluded claims, any conflict and how resolved, effective "current as of" date.
+
+### Discovery-first output: Source Shortlist
+
+When the user asks for source options, topic discovery, or articles to choose
+from, output a Source Shortlist before any article draft:
+
+| # | Source / author | URL | Type | Why it matters | Freshness | Best angle for our audience | Confidence |
+|---|-----------------|-----|------|----------------|-----------|-----------------------------|------------|
+
+Rules:
+- include 8-15 options for standard discovery, 15-25 for deep discovery
+- prioritize primary sources, respected publications, research labs, credible practitioners, and well-known technical writers
+- include a mix of article links, author/blog homepages, research posts, and technical case studies when useful
+- write the "Best angle for our audience" as a concrete article premise, not a vague topic label
+- stop and ask the user which source/angle to develop, unless the user already asked you to choose and proceed
 
 ### Step 6: Draft from the verified grid only
 
@@ -134,22 +178,23 @@ For citation rules and Hyperlink Map format, see [citations.md](references/citat
 For placeholder rules, screenshots, chart/diagram generation, and native image-adapter prompts, see [visual-placeholders.md](references/visual-placeholders.md), [browser-capture.md](references/browser-capture.md), and [generated-visuals.md](references/generated-visuals.md).
 
 Use this order:
-1. Use verified source images, screenshots, tables, or charts when they are the evidence.
+1. Capture verified source screenshots when the article needs visible evidence: news pages, source quotes, tables, charts, dashboards, filings, product pages, or docs.
 2. Generate deterministic charts from verified data when exact values matter.
-3. Use the host agent's configured image-generation backend for editorial visuals, conceptual diagrams, and non-numeric explanatory scenes.
-4. Leave a placeholder only when the asset cannot be produced in the current runtime; include exact acquisition instructions.
+3. Use GPT Image 2 or the host agent's configured image-generation backend for editorial visuals, diagrams, and publication graphics based on verified data when no suitable source screenshot or deterministic renderer is available.
+4. Keep an asset manifest with local paths, source URLs, capture/generation date, provenance, and whether each asset is evidence, derived from evidence, or illustrative.
+5. Leave a placeholder only when the asset cannot be produced in the current runtime; include exact acquisition instructions.
 
 ### Step 10: Final output
 
 Return in this order:
-1. Fact Grid (Markdown table + verification summary)
-2. Title + Optional Subhead
-3. Full article with inline citations
+1. Source Shortlist when in discovery-first mode, otherwise Fact Grid (Markdown table + verification summary)
+2. Title + Optional Subhead when drafting
+3. Full article with inline citations when drafting
 4. Embedded or attached visuals, with captions and source/provenance notes
 5. Hyperlink Map
 6. Source Notes
-7. Delivery artifact or link when requested
-8. Optional Disclaimer (required for articles touching markets, investing, tokens, macro, or public securities)
+7. Delivery artifact or link when requested: Markdown, HTML, DOCX, PDF, Google Docs, telegra.ph, or JSON
+8. Optional Disclaimer (required for articles touching markets, investing, tokens, macro, public securities, medical, legal, or other regulated topics)
 
 For HTML and JSON output formats, see [output-formats.md](references/output-formats.md).
 For DOCX, Google Docs, and telegra.ph publishing, see [document-publishing.md](references/document-publishing.md).
@@ -166,6 +211,7 @@ For DOCX, Google Docs, and telegra.ph publishing, see [document-publishing.md](r
 8. Repeat fact-check before delivery.
 9. Respect the host environment's citation, quotation, and copyright rules.
 10. Never use generated images or screenshots as factual evidence unless the underlying source is separately captured in the Fact Grid.
+11. Do not overfit the workflow to investment writing. Match the domain: AI, technology, policy, business, culture, education, operations, or product strategy may need different source tracks and article architecture.
 
 ## Failure conditions
 
@@ -201,6 +247,8 @@ Response to feedback must be surgical. Do not rewrite the whole article if one p
 | File | Contents |
 |------|----------|
 | [source-hierarchy.md](references/source-hierarchy.md) | Source trust hierarchy, freshness rules |
+| [ai-agentic-systems.md](references/ai-agentic-systems.md) | AI and agentic-systems source discovery, trusted authors, query patterns |
+| [runtime-adapters.md](references/runtime-adapters.md) | Codex, Claude Code, Hermes capability mapping |
 | [house-style.md](references/house-style.md) | Voice, structural patterns, forbidden AI patterns |
 | [article-construction.md](references/article-construction.md) | Article construction, sections, templates |
 | [output-formats.md](references/output-formats.md) | HTML, JSON schema, Markdown rules |
@@ -209,5 +257,5 @@ Response to feedback must be surgical. Do not rewrite the whole article if one p
 | [generated-visuals.md](references/generated-visuals.md) | Native image generation, charts, diagrams, visual provenance |
 | [browser-capture.md](references/browser-capture.md) | chip-relay browser workflow, screenshots, authenticated capture |
 | [document-publishing.md](references/document-publishing.md) | DOCX, Google Docs, HTML, telegra.ph publishing |
-| [agent-capabilities.md](references/agent-capabilities.md) | Runtime capability routing for Codex, OpenClaw, Hermes |
+| [agent-capabilities.md](references/agent-capabilities.md) | Runtime capability routing for Codex, Claude Code, Hermes, OpenClaw |
 | [examples.md](references/examples.md) | Example invocations and expected behavior |

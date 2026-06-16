@@ -2,13 +2,14 @@
 
 ## Use when
 
-Use this reference when the user asks for DOCX, Word, Google Docs, HTML, telegra.ph, Telegraph-style output, or a live published article link.
+Use this reference when the user asks for DOCX, Word, PDF, Google Docs, HTML, telegra.ph, Telegraph-style output, or a live published article link.
 
 ## Delivery target selection
 
 | User asks for | Deliver |
 |---------------|---------|
 | "file", "Word", "docx", "editorial handoff" | DOCX |
+| "PDF", "print", "fixed layout" | PDF, preferably generated from the verified DOCX/HTML |
 | "Google Docs" | Google Docs link if connector/browser upload is available; otherwise DOCX |
 | "Telegraph style" | HTML or telegra.ph page depending on whether publishing is requested |
 | "publish", "post to telegra.ph", "give me a link" | Article file first, then authorization request, then published page |
@@ -19,12 +20,27 @@ Use this reference when the user asks for DOCX, Word, Google Docs, HTML, telegra
 When a document adapter is available:
 
 1. Convert the final article into document structure: title, subhead, H2 sections, paragraphs, blockquotes, images, captions, hyperlink map, source notes, disclaimer.
-2. Embed images from screenshots or generated visuals at their article positions.
+2. Embed images from screenshots, deterministic charts, or generated visuals at their article positions.
 3. Preserve clickable links when supported.
 4. Render or inspect the file before final delivery when practical.
 5. Return the file path and any unsupported formatting notes.
 
 If no document adapter is available, produce Markdown or HTML and state that DOCX export requires a document-capable runtime.
+
+## PDF export
+
+When a PDF adapter is available:
+
+1. Generate PDF from the same verified article package used for DOCX/HTML.
+2. Preserve title hierarchy, captions, source notes, hyperlink map, and
+   disclaimer.
+3. Embed screenshots and generated visuals at readable size.
+4. Render or inspect the PDF before final delivery when practical.
+5. Check page breaks around tables, screenshots, and captions.
+6. Return the PDF file path and any unsupported formatting notes.
+
+If no PDF adapter is available, produce a print-ready HTML file and state that
+PDF export requires a PDF-capable runtime.
 
 ## Google Docs
 
@@ -64,5 +80,6 @@ Final response should include:
 - target and status: DOCX created, Google Docs created, telegra.ph published, or fallback produced
 - file path or URL
 - visual assets included
+- asset manifest path or summary
 - sources current as of date
 - any manual step still required

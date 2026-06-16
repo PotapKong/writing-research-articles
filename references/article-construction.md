@@ -50,6 +50,26 @@ Required when the article touches markets, investing, tokens, macro positioning,
 - each section must advance the core argument
 - if one block is weakly supported: remove it, reduce to one cautious sentence, or move to a brief mention
 - a tighter article beats a broader but weaker one
+- match structure to domain; do not force every topic into a market/investment frame
+- for AI and technical topics, separate what the system can do, how it works, what evidence supports it, where it fails, and what it changes for operators or users
+
+## Domain-specific structure options
+
+### AI and agentic systems
+
+- What changed in the agent stack
+- What the source actually shows
+- The architecture or workflow underneath
+- Why it matters for builders, operators, or businesses
+- Where the claims are overextended
+- What to test before adopting it
+- What to watch next
+
+### Source discovery articles
+
+When the user first asks for links or topics, do not write the article yet.
+Return the Source Shortlist, then wait for the user's choice. After selection,
+turn the chosen source into a new article using the wider Fact Grid.
 
 ## Modular drafting
 

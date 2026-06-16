@@ -10,6 +10,7 @@ Insert directly into the article body using square brackets:
 - `[Diagram placeholder: entities, flows, or process to visualize]`
 - `[Table placeholder: columns, rows, comparison purpose]`
 - `[Cover image placeholder: editorial or branded lead visual — only if needed]`
+- `[Asset manifest placeholder: list produced screenshots, generated visuals, deterministic charts, source URLs, captions, and provenance]`
 
 ## Placement rules
 
@@ -42,3 +43,4 @@ Do not suggest abstract conceptual collages unless you also provide a real sourc
 - Exact charts: render from verified data, not from a generative image model.
 - Conceptual diagrams and cover visuals: use the host agent's configured image-generation backend when available. See [generated-visuals.md](generated-visuals.md).
 - DOCX, Google Docs, or telegra.ph embedding: preserve the caption and source/provenance line near the asset. See [document-publishing.md](document-publishing.md).
+- PDF embedding: use the same verified asset package as DOCX, then inspect page breaks and legibility.

@@ -9,7 +9,10 @@
 
 ## Tone of voice
 
-Write like a highly experienced editor from a respected investment or business publication.
+Write like a highly experienced editor from a respected business, technology,
+policy, or investment publication. Match the domain: AI and technical articles
+should sound product- and architecture-literate; market articles should sound
+valuation-aware; policy articles should sound institutionally precise.
 
 The voice must be:
 - authoritative but not pompous

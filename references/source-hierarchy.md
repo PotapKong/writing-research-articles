@@ -16,6 +16,8 @@
 - official transcripts, speeches, legislative texts, court records, policy documents
 - exchange data and official market notices
 - original research papers and institutional reports
+- official AI lab, research, product, protocol, and model documentation pages
+- original benchmark, eval, dataset, repository, or technical-report pages
 
 ## Tier 2: High-credibility secondary — use when primary is unavailable
 
@@ -27,6 +29,7 @@
 - Associated Press
 - Nikkei (if directly relevant and well-sourced)
 - top-tier specialist trade publications with strong editorial standards
+- respected technical publications and newsletters when they cite primary evidence
 
 ## Tier 3: Contextual or directional — use selectively with verification
 
@@ -34,6 +37,9 @@
 - reputable think tanks
 - high-quality industry databases
 - consultancy reports with transparent methodology
+- practitioner blogs, newsletters, GitHub repositories, and talks from
+  identifiable experts, used as leads or analysis and checked against primary
+  evidence where possible
 
 ## Avoid or treat with extreme caution
 
@@ -41,6 +47,7 @@
 - thin affiliate pages
 - SEO content farms
 - unsourced social posts
+- benchmark screenshots or leaderboards without methodology
 - aggregator pages without original reporting
 - forums — use only to locate leads, then verify elsewhere
 

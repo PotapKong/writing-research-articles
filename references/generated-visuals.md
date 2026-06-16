@@ -6,7 +6,10 @@ Use this reference when the article needs charts, diagrams, editorial illustrati
 
 ## Backend selection
 
-Use the image-generation method configured in the current agent runtime. Do not assume one universal backend.
+Use the image-generation method configured in the current agent runtime. Do not
+assume one universal backend. If GPT Image 2 is configured, prefer it for
+polished editorial diagrams, cover images, and verified-data publication
+graphics that need strong visual quality.
 
 Examples of valid host-native backends:
 
@@ -26,7 +29,7 @@ Selection heuristic:
 | Fast draft concept | lowest-latency configured image model |
 | Private or sensitive source material | local/private backend if available |
 | Diagram with labels | deterministic diagram tool first, image model only if visual polish matters |
-| Exact data chart | deterministic chart renderer, not image generation |
+| Exact data chart | deterministic chart renderer first; GPT Image 2 only with exact supplied values and QA |
 | Style consistency across a series | the backend already used for the series |
 
 Do not hard-code an unavailable model name. Check the runtime, environment config, or owner preference when implementation details matter.
@@ -39,6 +42,9 @@ Use this rule:
 
 - **Exact numbers, time series, rankings, prices, market share:** render deterministically from verified data.
 - **Processes, mechanisms, architecture, causal chains:** use diagrams, Mermaid, vector drawing, or the configured image backend.
+- **Verified-data publication graphics:** may use GPT Image 2 when no source
+  screenshot or deterministic renderer is available, but the prompt must include
+  the exact data table and the output must be checked against it.
 - **Editorial cover images and atmosphere:** use the configured image backend only when the article benefits from a lead visual.
 - **Screenshots of source material:** capture through browser tools, not image generation.
 
@@ -51,6 +57,38 @@ Use this rule:
 5. Embed with a caption and source line.
 
 If no chart renderer is available, provide a table and leave a chart placeholder with exact data instructions.
+
+## GPT Image 2 verified-data workflow
+
+Use this only when a visual is useful and no suitable source screenshot or local
+deterministic renderer is available.
+
+1. Build a small verified data table from the Fact Grid.
+2. Include the source URL, date, metric, units, and all values in the image
+   prompt.
+3. Ask for a simple publication graphic with legible labels.
+4. Forbid invented labels, extra data points, fake logos, and decorative
+   benchmark values.
+5. Inspect the result: every label and number must match the verified data.
+6. If the generated image alters values or labels, discard it and use a table or
+   placeholder instead.
+7. Caption it as "Generated publication graphic based on verified source data",
+   not as a source screenshot.
+
+Prompt pattern:
+
+```text
+Create a clean publication chart based only on the verified data below.
+Chart type: [bar/line/comparison/flow].
+Title: [plain factual title].
+Data:
+- [Label]: [value] [unit], source date [date]
+- [Label]: [value] [unit], source date [date]
+Required labels: [exact labels].
+Style: editorial, legible, restrained, no fake logos, no extra numbers.
+Do not add data points, forecasts, rankings, or annotations not listed here.
+Caption/provenance: generated from verified data, source URL [url].
+```
 
 ## Image prompt pattern
 
@@ -83,3 +121,6 @@ Avoid: stock-photo look, fake logos, unreadable text, invented charts, exaggerat
 - The asset matches the article's evidence and tone.
 - The caption distinguishes generated illustration from source screenshot.
 - The file path or URL is recorded in the delivery notes.
+- Generated data visuals match every value and label in the verified data table.
+- The asset manifest records whether the image is evidence, derived from
+  evidence, or illustrative.

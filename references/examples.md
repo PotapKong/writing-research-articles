@@ -15,7 +15,37 @@
 
 ---
 
-## Example 2: Sparse brief with reference material
+## Example 2: AI agentic-systems source discovery
+
+**User:** Find strong Western English-language articles and authors about agentic systems, coding agents, and multi-agent workflows. Give me links first so I can choose what we turn into a Russian article.
+
+**Expected behavior:**
+1. switch to discovery-first mode
+2. search across AI labs, respected technical publications, newsletters, product/engineering blogs, and credible expert writers
+3. open promising URLs and exclude weak snippet-only leads
+4. return a Source Shortlist with 8-15 options
+5. include "Best angle for our audience" for every source
+6. stop and ask which source or angle the user wants to develop
+7. do not draft the article until the user chooses
+
+---
+
+## Example 3: AI article from a chosen source
+
+**User:** Take option 4 from the shortlist and write a new article for our audience about what it means for AI-agent teams in business workflows.
+
+**Expected behavior:**
+1. reopen the chosen source
+2. extract its core thesis and evidence without copying structure
+3. search for primary confirmations, counterarguments, and newer related sources
+4. build a Fact Grid from the wider evidence base
+5. write a new article in the target language and house style
+6. credit the chosen source through inline citation and Hyperlink Map
+7. include practical implications, limits, and what to watch next
+
+---
+
+## Example 4: Sparse brief with reference material
 
 **User:** Use this reel as the base angle. Topic: crisis indicators for 2026–2027. Mention the Buffett indicator briefly — it was already covered before.
 
@@ -30,7 +60,7 @@
 
 ---
 
-## Example 3: n8n pipeline output
+## Example 5: n8n pipeline output
 
 **User:** Research [topic] and return structured JSON for my n8n workflow.
 
@@ -42,7 +72,7 @@
 
 ---
 
-## Example 4: Article with screenshots and generated diagram
+## Example 6: Article with screenshots and generated diagram
 
 **User:** Research the latest AI chip export controls, capture key source screenshots through chip-relay, generate one clean explanatory diagram with the configured image backend, and deliver a DOCX.
 
@@ -56,7 +86,22 @@
 
 ---
 
-## Example 5: telegra.ph publishing
+## Example 7: Codex/Claude/Hermes visual article package
+
+**User:** Research AI-agent observability, capture screenshots of the best source tables or charts, generate one GPT Image 2 diagram if no suitable chart exists, and deliver DOCX plus PDF.
+
+**Expected behavior:**
+1. detect runtime capabilities: browser screenshots, image backend, DOCX/PDF export
+2. research and verify as normal
+3. capture source screenshots for tables, charts, news pages, docs, or benchmark panels that support the article
+4. if no source chart exists, build a verified data table and render a deterministic chart; use GPT Image 2 only for a checked publication graphic or diagram based on that verified data
+5. record every visual in the asset manifest with source URL, provenance, caption, and verification notes
+6. export DOCX and PDF when the runtime supports it; otherwise return the closest durable artifact and say which adapter is missing
+7. verify files exist and, when practical, render/inspect them before final delivery
+
+---
+
+## Example 8: telegra.ph publishing
 
 **User:** Prepare this as a Telegraph-style article, publish it to telegra.ph from my authenticated browser profile, and give me the link.
 
